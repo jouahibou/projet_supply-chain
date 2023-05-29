@@ -9,4 +9,6 @@ nous avons organisé ces données en utilisant différentes bases de données, �
 
 ![Logo](https://github.com/jouahibou/projet_supply-chain/blob/873bb14efc8340c84e21c5a9f0e96d7d8d2f39d3/Documentation/Elasticsearch.png)
 
-https://github.com/jouahibou/projet_supply-chain/blob/873bb14efc8340c84e21c5a9f0e96d7d8d2f39d3/Documentation/Diagramme%20sans%20nom.pdf
+Dans ce schéma , nous avons ajouté une table "domaine" dans la base de données 1 pour stocker les informations sur les différents domaines d'entreprise. Le lien entre les tables "entreprise" et "domaine" se fait via l'identifiant du domaine (id_domaine).
+
+![Logo](https://github.com/jouahibou/projet_supply-chain/blob/dfce805a6cfee740c3a63c85e83478c68d39a7b5/Documentation/Sch%C3%A9maBD.png)
