@@ -9,4 +9,4 @@ nous avons organisé ces données en utilisant différentes bases de données, �
 
 ![Logo](https://github.com/jouahibou/projet_supply-chain/blob/873bb14efc8340c84e21c5a9f0e96d7d8d2f39d3/Documentation/Elasticsearch.png)
 
-[Télécharger le document PDF](https://github.com/jouahibou/projet_supply-chain/blob/873bb14efc8340c84e21c5a9f0e96d7d8d2f39d3/Documentation/Diagramme%20sans%20nom.pdf)
+https://github.com/jouahibou/projet_supply-chain/blob/873bb14efc8340c84e21c5a9f0e96d7d8d2f39d3/Documentation/Diagramme%20sans%20nom.pdf
