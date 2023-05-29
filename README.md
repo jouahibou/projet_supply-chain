@@ -8,3 +8,5 @@ Nous disposons de deux catégories de données. La première regroupe des inform
 nous avons organisé ces données en utilisant différentes bases de données, à savoir une base de données relationnelle (MySQL) et une base de données NoSQL avec Elasticsearch.
 
 ![Logo](https://github.com/jouahibou/projet_supply-chain/blob/873bb14efc8340c84e21c5a9f0e96d7d8d2f39d3/Documentation/Elasticsearch.png)
+
+[Télécharger le document PDF](https://github.com/jouahibou/projet_supply-chain/blob/873bb14efc8340c84e21c5a9f0e96d7d8d2f39d3/Documentation/Diagramme%20sans%20nom.pdf)
