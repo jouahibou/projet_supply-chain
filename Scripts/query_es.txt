@@ -1,0 +1,107 @@
+#DELETE /asurion
+
+PUT /asurion
+{
+  "settings": {
+    "number_of_shards": 2,
+    "number_of_replicas": 2
+  },
+  "mappings": {
+    "properties": {
+      "titre": {
+        "type": "text"
+      },
+      "nom": {
+        "type": "integer"
+      },
+      "stars": {
+        "type": "text"
+      },
+      "localisation": {
+        "type": "text"
+      },
+      "nb_reviews": {
+        "type": "text"
+      },
+      "date_review": {
+        "type": "date"
+      },
+      "date_experience": {
+        "type": "date"
+      },
+      "comment": {
+        "type": "text"
+      }
+    }
+  }
+}
+
+GET /_cat/indices?v
+
+GET /_cluster/health?allow_no_indices
+
+GET /_cat/shards?v
+
+GET /_cat/nodes?v
+
+GET /asurion/_mapping
+
+GET /asurion/_search
+
+
+#___________________________________________________
+# Check if DB works ok:
+#___________________________________________________
+
+
+GET /asurion/_search
+{
+  "query": {
+    "match": {
+      "comment": {
+        "query": "Great place to work",
+        "operator": "and"
+      }
+    }
+  }
+}
+
+
+GET /asurion/_search
+{
+  "_source": ["comment"],
+  "query": {
+    "match_phrase": {
+      "comment": {
+        "query": "Explained how everything works and convinced us we should have the extra insurance."
+      }
+    }
+  }
+}
+
+
+GET /asurion/_search
+{
+  "query": {
+    "multi_match": {
+      "query": "great place",
+      "fields": ["comment", "titre"]
+    }
+  }
+}
+
+
+GET /asurion/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match_phrase": {
+            "comment": "very horrible"
+          }
+        }
+      ]
+    }
+  }
+}
