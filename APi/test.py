@@ -17,26 +17,13 @@ data = {
 
 
 # Lire un document
-#response = requests.get('http://localhost:8000/documents/asurion/V4oa5IgB5t4qIqU7xMwb')
+#response = requests.get('http://localhost:8000/documents/asurion/M6-HJ4kB2lCuUadSSTsI')
 #doc = response.json()
 #if doc is not None:
-#    print(doc)
+ #   print(doc)
 #else:
 #    print('Document not found')
     
-    
-# Rechercher des documents
-query = {
-    "query": {
-        "match": {
-            "titre": "titanic"
-        }
-    }
-}
-#response = requests.get('http://localhost:8000/documents/asurion/_search', json=query)
-#print(response.json())    
-
-
 data = {
     "titre": "data engineer",
     "nom": "DataScientest",
@@ -47,9 +34,9 @@ data = {
     "date_experience": "2022-06-15",
     "comment": "C'était un excellent séjour !"
 }
-response = requests.put('http://localhost:8000/documents/asurion/V4oa5IgB5t4qIqU7xMwb', json=data)
+response = requests.put('http://localhost:8000/documents/asurion/M6-HJ4kB2lCuUadSSTsI', json=data)
 print(response.json())
 
 # Supprimer un document
-response = requests.delete('http://localhost:8000/documents/asurion/V4oa5IgB5t4qIqU7xMwb')
+response = requests.delete('http://localhost:8000/documents/asurion/M6-HJ4kB2lCuUadSSTsI')
 print(response.json())

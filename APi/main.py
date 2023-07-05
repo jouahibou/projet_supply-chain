@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from typing import Dict, Any
 from database import get_document, search_documents, add_document, update_document, delete_document
-
+from fastapi import Depends
+from elasticsearch import Elasticsearch
 app = FastAPI()
 
 @app.get('/')
@@ -17,10 +18,6 @@ async def read_document(index: str, id: str):
         return {"error": "Document not found"}
     return doc
 
-@app.get("/documents/{index}/_search")
-async def search_documents(index: str, query: Dict[str, Any],es:Elasticsearch=Depends(get_es)):
-    docs = search_documents(es,index, query)
-    return docs
 
 @app.post("/documents/{index}")
 async def create_document(index: str, document: Dict[str, Any]):

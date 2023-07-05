@@ -1,8 +1,7 @@
 from elasticsearch import Elasticsearch
 from elasticsearch.exceptions import NotFoundError
 
-es= Elasticsearch(hosts = "http://@localhost:9200")
-
+es = Elasticsearch(hosts=["http://79.125.3.215:9200"])
 
 def get_document(index:str,id:str):
     """ index : le nom de l'index dans elasticsearch
