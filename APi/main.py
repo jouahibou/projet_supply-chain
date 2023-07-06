@@ -1,8 +1,11 @@
 from fastapi import FastAPI
 from typing import Dict, Any
-from database import get_document, search_documents, add_document, update_document, delete_document
+from database import get_document, search_documents, add_document, update_document, delete_document,text_cleaner,delete_punctiation,truncate_text_column
 from fastapi import Depends
 from elasticsearch import Elasticsearch
+import pandas as pd
+import warnings
+import joblib
 app = FastAPI()
 
 @app.get('/')
@@ -39,3 +42,19 @@ async def delete_document(index: str, id: str):
     if success:
         return {"success": True}
     return {"error": "Failed to delete document"}
+
+@app.post("/predictions")
+async def predict(data: Dict[str, str]):
+    warnings.filterwarnings('ignore')
+    
+    clf_final = joblib.load('mnb_final_model.joblib')
+    
+    df = pd.DataFrame(data, columns=['text'])
+
+    text_cleaner("text")
+    delete_punctiation(df, "text")
+    truncate_text_column(df, 'text')
+
+    result = clf_final.predict(df["text"])
+        # Return the prediction result as a JSON object
+    return {"result": result}
