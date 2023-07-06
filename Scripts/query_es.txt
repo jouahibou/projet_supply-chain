@@ -8,29 +8,71 @@ PUT /asurion
   },
   "mappings": {
     "properties": {
-      "titre": {
-        "type": "text"
+      "comment" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          }
+        },
+      "date_experience" : {
+        "type" : "text",
+        "fields" : {
+          "keyword" : {
+            "type" : "keyword",
+            "ignore_above" : 256
+          }
+        }
       },
-      "nom": {
-        "type": "integer"
+      "date_review" : {
+        "type" : "date"
       },
-      "stars": {
-        "type": "text"
+      "localisation" : {
+        "type" : "text",
+        "fields" : {
+          "keyword" : {
+            "type" : "keyword",
+            "ignore_above" : 256
+          }
+        }
       },
-      "localisation": {
-        "type": "text"
+      "nb_reviews" : {
+        "type" : "text",
+        "fields" : {
+          "keyword" : {
+            "type" : "keyword",
+            "ignore_above" : 256
+          }
+        }
       },
-      "nb_reviews": {
-        "type": "text"
+      "nom" : {
+        "type" : "text",
+        "fields" : {
+          "keyword" : {
+            "type" : "keyword",
+            "ignore_above" : 256
+          }
+        }
       },
-      "date_review": {
-        "type": "date"
+      "stars" : {
+        "type" : "text",
+        "fields" : {
+          "keyword" : {
+            "type" : "keyword",
+            "ignore_above" : 256
+          }
+        }
       },
-      "date_experience": {
-        "type": "date"
-      },
-      "comment": {
-        "type": "text"
+      "titre" : {
+        "type" : "text",
+        "fields" : {
+          "keyword" : {
+            "type" : "keyword",
+            "ignore_above" : 256
+          }
+        }
       }
     }
   }
