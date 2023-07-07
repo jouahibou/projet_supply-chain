@@ -6,6 +6,7 @@ from elasticsearch import Elasticsearch
 import pandas as pd
 import warnings
 import joblib
+
 app = FastAPI()
 
 @app.get('/')
@@ -43,18 +44,28 @@ async def delete_document(index: str, id: str):
         return {"success": True}
     return {"error": "Failed to delete document"}
 
-@app.post("/predictions")
-async def predict(data: Dict[str, str]):
+@app.post("/predict/{sentence}")
+async def predict(sentence: str):
     warnings.filterwarnings('ignore')
-    
-    clf_final = joblib.load('mnb_final_model.joblib')
-    
-    df = pd.DataFrame(data, columns=['text'])
 
-    text_cleaner("text")
+    clf_final = joblib.load('mnb_final_model.joblib')
+
+    data = {'text': [sentence]}
+    df = pd.DataFrame(data, columns=['text'])
+    text_cleaner(df,"text")
     delete_punctiation(df, "text")
     truncate_text_column(df, 'text')
 
-    result = clf_final.predict(df["text"])
-        # Return the prediction result as a JSON object
-    return {"result": result}
+    predictions = clf_final.predict(df["text"])
+
+    # Convertir le tableau NumPy en liste Python
+    predictions_list = predictions.tolist()
+
+    # Créer un dictionnaire avec la clé "prédiction" et la valeur des prédictions
+    result = {"prediction": predictions_list}
+
+    # Convertir le dictionnaire en format JSON
+    json_result = json.dumps(result)
+
+    # Afficher la prédiction au format JSON
+    return JSONResponse(content=result)

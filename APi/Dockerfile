@@ -1,17 +1,23 @@
-# Utilisez l'image Python 3.9 comme image de base
+# Use an official Python runtime as a parent image
 FROM python:3.9-slim-buster
 
-# Copiez le code FastAPI dans le conteneur
-COPY . /app
-
-# Définir le répertoire de travail
+# Set the working directory to /app
 WORKDIR /app
 
-# Installez les dépendances du projet
+# Copy the requirements file into the container at /app
+COPY requirements.txt .
+
+# Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Exposez le port 8000 pour l'API FastAPI
+# Copy the rest of the application code into the container at /app
+COPY . .
+
+# Make port 8000 available to the world outside this container
 EXPOSE 8000
+
+# Define environment variable
+ENV NAME World
 
 # Démarrez l'application FastAPI
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -44,8 +44,8 @@ def delete_document(index: str, id: str):
 
 
 
-    def delete_punctiation(df, comment_col):
-        """
+def delete_punctiation(df, comment_col):
+    """
         Removes punctuation from the specified column of a DataFrame.
 
         Args:
@@ -55,18 +55,18 @@ def delete_document(index: str, id: str):
         Returns:
             None. The DataFrame is modified in-place.
 
-        """
-        pattern = r'[^a-zA-Z0-9\s]'
-        df[comment_col] = df[comment_col].replace(pattern, ' ', regex=True)
-        df[comment_col] = df[comment_col].str.replace('  ', ' ')
+    """
+    pattern = r'[^a-zA-Z0-9\s]'
+    df[comment_col] = df[comment_col].replace(pattern, ' ', regex=True)
+    df[comment_col] = df[comment_col].str.replace('  ', ' ')
 
 
-    def truncate_text_column(df, column):
-        df[column] = df[column].apply(lambda x: ' '.join(x.split()[:499]))
-        return df
+def truncate_text_column(df, column):
+    df[column] = df[column].apply(lambda x: ' '.join(x.split()[:499]))
+    return df
 
 
-    def text_cleaner(column):
-        df[column] = df[column].str.lower() \
+def text_cleaner(df,column):
+    df[column] = df[column].str.lower() \
                                 .str.strip() \
                                 .str.replace(r'\s+', ' ')
