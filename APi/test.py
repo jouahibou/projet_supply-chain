@@ -1,5 +1,6 @@
 import requests
 import json
+import logging
 
 # Créer un document
 data = {
@@ -44,30 +45,21 @@ data = {
 
 
 
-# URL de l'API
-url = "http://localhost:8000/predict/"
 
 # Phrase à prédire
-sentence = "excellent service with any insurance claim you obviously have to explain the damage and click through the fraud acknowledgements, etc. that was not difficult at all.after that, the process was slick slick slick. the claim was filed late on a thursday afternoon and the replacement arrived on the friday morning.clear instructions the whole way and a very simple process"
+#sentence = "excellent service with any insurance claim you obviously have to explain the damage and click through the fraud acknowledgements, etc. that was not difficult at all.after that, the process was slick slick slick. the claim was filed late on a thursday afternoon and the replacement arrived on the friday morning.clear instructions the whole way and a very simple process"
 
-# Envoyer une requête POST à l'API
-response = requests.post(url + sentence)
+#import requests
 
-import requests
+#logging.basicConfig(filename='apps.log', level=logging.DEBUG)
 
-# URL de votre API FastAPI
-url = "http://localhost:8000/predict/"
+#url = "http://localhost:8000/data_prediction_new_comment"
+#params = {"review": sentence}
 
-# Texte à prédire
-sentence = "Ceci est un exemple de texte à prédire."
+#response = requests.get(url, params=params)
 
-# Envoyer une requête POST avec le texte comme paramètre
-response = requests.post(url + sentence)
-
-# Vérifier que la requête a réussi (code de statut 200)
-if response.status_code == 200:
-    # Récupérer la prédiction depuis la réponse
-    prediction = response.json()["prediction"]
-    print(f"La prédiction pour le texte '{sentence}' est : {prediction}")
-else:
-    print("La requête a échoué avec le code de statut :", response.status_code)
+#if response.ok:
+#    data = response.json()
+#    print("Note prédite:", data["predicted_star_comment"])
+#else:
+#    print("Erreur:", response.status_code, response.text)

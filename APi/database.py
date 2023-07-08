@@ -1,6 +1,20 @@
 from elasticsearch import Elasticsearch
 from elasticsearch.exceptions import NotFoundError
 
+import warnings
+warnings.filterwarnings("ignore")
+import joblib
+import re
+from unidecode import unidecode
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+import nltk
+nltk.download('stopwords')
+stop_words = set(stopwords.words('english'))
+
+nltk.download('punkt')
+
+
 es = Elasticsearch(hosts=["http://79.125.3.215:9200"])
 
 def get_document(index:str,id:str):
@@ -66,7 +80,13 @@ def truncate_text_column(df, column):
     return df
 
 
-def text_cleaner(df,column):
-    df[column] = df[column].str.lower() \
-                                .str.strip() \
-                                .str.replace(r'\s+', ' ')
+def cleaner_rev(corpus):
+    corpus = corpus.lower()
+    corpus = re.sub(r'<[^>]+>', " ", corpus)
+    corpus = re.sub(r"[^\w\s]", " ", corpus)
+    corpus = unidecode(corpus)
+    corpus = re.sub(r"\d+", " ", corpus)
+    corpus = re.sub(r"\b\w{16,}\b", " ", corpus)
+    corpus = re.sub(r"\b\w{1,2}\b", " ", corpus)
+    corpus = " ".join([word for word in word_tokenize(corpus) if word.lower() not in stop_words])
+    return corpus

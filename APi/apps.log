@@ -1,0 +1,2 @@
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): localhost:8000
+DEBUG:urllib3.connectionpool:http://localhost:8000 "GET /data_prediction_new_comment?review=excellent+service+with+any+insurance+claim+you+obviously+have+to+explain+the+damage+and+click+through+the+fraud+acknowledgements%2C+etc.+that+was+not+difficult+at+all.after+that%2C+the+process+was+slick+slick+slick.+the+claim+was+filed+late+on+a+thursday+afternoon+and+the+replacement+arrived+on+the+friday+morning.clear+instructions+the+whole+way+and+a+very+simple+process HTTP/1.1" 200 28

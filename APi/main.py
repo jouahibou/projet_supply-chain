@@ -1,13 +1,29 @@
 from fastapi import FastAPI
 from typing import Dict, Any
-from database import get_document, search_documents, add_document, update_document, delete_document,text_cleaner,delete_punctiation,truncate_text_column
+from database import get_document, search_documents, add_document, update_document, delete_document,cleaner_rev,delete_punctiation,truncate_text_column
 from fastapi import Depends
 from elasticsearch import Elasticsearch
 import pandas as pd
 import warnings
 import joblib
+import logging
+
+import warnings
+warnings.filterwarnings("ignore")
+import joblib
+import re
+from unidecode import unidecode
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+import nltk
+nltk.download('stopwords')
+nltk.download('punkt')
+stop_words = set(stopwords.words('english'))
 
 app = FastAPI()
+
+
+
 
 @app.get('/')
 def get_index():
@@ -44,28 +60,22 @@ async def delete_document(index: str, id: str):
         return {"success": True}
     return {"error": "Failed to delete document"}
 
-@app.post("/predict/{sentence}")
-async def predict(sentence: str):
-    warnings.filterwarnings('ignore')
-
-    clf_final = joblib.load('mnb_final_model.joblib')
-
-    data = {'text': [sentence]}
-    df = pd.DataFrame(data, columns=['text'])
-    text_cleaner(df,"text")
-    delete_punctiation(df, "text")
-    truncate_text_column(df, 'text')
-
-    predictions = clf_final.predict(df["text"])
-
-    # Convertir le tableau NumPy en liste Python
-    predictions_list = predictions.tolist()
-
-    # Créer un dictionnaire avec la clé "prédiction" et la valeur des prédictions
-    result = {"prediction": predictions_list}
-
-    # Convertir le dictionnaire en format JSON
-    json_result = json.dumps(result)
-
-    # Afficher la prédiction au format JSON
-    return JSONResponse(content=result)
+@app.get("/data_prediction_new_comment", 
+        description ="Donne une prédiction de la note /5 qu'un client peut mettre.",
+        tags=["Prediction"])
+async def data_prediction_new_comment(review: str):  
+    try:
+        with open("mnb_final_model.joblib", "rb") as f:
+            ml_model = joblib.load(f)
+        review_clean = cleaner_rev(review)    
+        df=pd.DataFrame(pd.Series(review_clean, name="text"))
+        result = ml_model.predict(df["text"])
+        return {
+                "predicted_star_comment": int(result)
+            }
+    except Exception as e:
+        logging.error(f"Error: {e}")
+        return {
+            "error": "An error occurred while predicting the star rating"
+        }
+    
