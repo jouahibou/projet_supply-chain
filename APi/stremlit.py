@@ -1,4 +1,6 @@
 import streamlit as st
+import requests
+from Stats1 import pages1
 
 # Définir l'URL de la route de prédiction
 PREDICTION_URL = "http://localhost:8000/data_prediction_new_comment"
@@ -12,11 +14,10 @@ def predict_star_rating(review):
 
 # Page d'accueil
 def home():
-    st.title("Prédiction de note /5 pour les commentaires")
-
+    st.title("Supply Chain ")
+    st.subheader("Prédiction de note /5 pour les commentaires")
     # Créer deux colonnes pour saisir le commentaire et afficher la note prédite
     col1, col2 = st.columns(2)
-
     # Champ de texte pour saisir le commentaire
     with col1:
         review = st.text_input("Saisissez votre commentaire :")
@@ -35,8 +36,8 @@ def home():
 
 # Page 1
 def page1():
-    st.subheader("Page 1")
-    # Contenu de la page 1
+    pages1()
+
 
 # Page 2
 def page2():
@@ -44,13 +45,13 @@ def page2():
     # Contenu de la page 2
 
 # Créer les composants de navigation
-menu = ["Accueil", "Page 1", "Page 2"]
+menu = ["Accueil", "Stats 1", "Page 2"]
 choice = st.sidebar.selectbox("Navigation", menu)
 
 # Afficher la page en fonction du choix de l'utilisateur
 if choice == "Accueil":
     home()
-elif choice == "Page 1":
+elif choice == "Stats 1":
     page1()
 else:
     page2()
