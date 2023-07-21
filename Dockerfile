@@ -6,9 +6,10 @@ WORKDIR /app
 # Copiez les fichiers de votre projet dans le conteneur
 COPY . .
 
+RUN echo "DefaultLimitNPROC=2048" >> /etc/systemd/system.conf
+
 # Installez les dépendances
-RUN ulimit -u 2048 && \
-    pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Exposez le port 80 pour FastAPI et le port 8501 pour Streamlit
 EXPOSE 80
