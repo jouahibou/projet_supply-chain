@@ -1,41 +1,13 @@
 from fastapi import FastAPI
-from typing import Dict, Any
-<<<<<<< HEAD
-from database import get_document, search_documents, add_document, update_document, delete_document,cleaner_rev,delete_punctiation,truncate_text_column
-from fastapi import Depends
-from elasticsearch import Elasticsearch
-import pandas as pd
-import warnings
-import joblib
-import logging
-
-import warnings
-=======
 from database import get_document,cleaner_rev, add_document, update_document, delete_document
 from fastapi import Depends
-from elasticsearch import Elasticsearch
 import joblib
 import logging
 import pandas as pd
-
 import warnings
 
-import logging
-import warnings
->>>>>>> seydina_deve
-warnings.filterwarnings("ignore")
-import joblib
-import re
-from unidecode import unidecode
-from nltk.tokenize import word_tokenize
-from nltk.corpus import stopwords
-import nltk
-nltk.download('stopwords')
-nltk.download('punkt')
-<<<<<<< HEAD
-stop_words = set(stopwords.words('english'))
-=======
->>>>>>> seydina_deve
+
+
 
 app = FastAPI()
 
