@@ -2,7 +2,6 @@ import plotly.express as px
 import streamlit as st
 import altair as alt
 import pandas as pd
-from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 #from import_es_data import import_data_from_es
 
@@ -59,10 +58,6 @@ def show_comment_distri_by_loc(df):
              labels={'localisation': 'Country', 'nb_comments': 'Number of comments'})
     st.plotly_chart(fig, use_container_width=True)
 
-
-
-import pandas as pd
-
 def plot_review_timeline(df, rating_filter=None):
     # Filtrer les données en fonction de la note sélectionnée (si applicable)
     if rating_filter is not None:
@@ -89,29 +84,3 @@ def plot_review_timeline(df, rating_filter=None):
     altair_plot = st.altair_chart(chart, use_container_width=True)
     return altair_plot
 
-def generate_wordcloud(df):
-    """
-    Cette méthode prend en entrée un DataFrame de commentaires et retourne un nuage de mots basé sur les commentaires.
-    """
-    # Concaténer tous les commentaires dans une chaîne de caractères
-    df['comment'] = df['comment'].astype(str)
-    comment_words = ''
-    for review in df['comment']:
-        comment_words += review + ' '
-
-    # Générer un nuage de mots des commentaires
-    wordcloud = WordCloud(width=800, height=800,
-                          background_color='white',
-                          min_font_size=10).generate(comment_words)
-
-    # Utiliser la police de caractères par défaut de Matplotlib
-    plt.rcParams['font.family'] = 'sans-serif'
-
-    # Afficher le nuage de mots
-    plt.figure(figsize=(8, 8), facecolor=None)
-    plt.imshow(wordcloud)
-    plt.axis("off")
-    plt.tight_layout(pad=0)
-
-    # Retourner le nuage de mots
-    return plt
