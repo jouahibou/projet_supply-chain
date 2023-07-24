@@ -3,28 +3,12 @@ from elasticsearch.exceptions import NotFoundError
 from elasticsearch.helpers import scan
 import warnings
 warnings.filterwarnings("ignore")
-import joblib
 import re
 from unidecode import unidecode
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
-import nltk
-nltk.download('stopwords')
-stop_words = set(stopwords.words('english'))
-nltk.download('punkt')
 
-import warnings
-warnings.filterwarnings("ignore")
-import joblib
-import re
-from unidecode import unidecode
-from nltk.tokenize import word_tokenize
-from nltk.corpus import stopwords
-import nltk
-nltk.download('stopwords')
-stop_words = set(stopwords.words('english'))
 
-nltk.download('punkt')
 
 
 es = Elasticsearch(hosts=["http://79.125.3.215:9200"])
