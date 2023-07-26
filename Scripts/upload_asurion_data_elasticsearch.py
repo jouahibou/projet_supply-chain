@@ -90,7 +90,7 @@ settings = {
 es.indices.create(index=index_name, body=settings)
 
 # Importer des données à partir d'un fichier CSV
-with open('/home/ubuntu/projet_supply-chain/Data/asurion_complete.csv', encoding='utf-8') as f:
+with open('../Data/asurion_complete.csv', encoding='utf-8') as f:
     reader = csv.DictReader(f)
 
     # Préparer les données pour l'importation en utilisant la méthode helpers.bulk

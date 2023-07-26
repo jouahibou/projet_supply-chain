@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from database import get_document,cleaner_rev, add_document, update_document, delete_document
+from .database import get_document,cleaner_rev, add_document, update_document, delete_document
 from fastapi import Depends
 import joblib
 import logging
