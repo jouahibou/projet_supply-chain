@@ -2,7 +2,8 @@ from elasticsearch import Elasticsearch, helpers
 import csv
 
 # Créer une instance de connexion Elasticsearch
-es = Elasticsearch()
+es = Elasticsearch(hosts = "http://@localhost:9200")
+
 
 # Définir le nom de l'index
 index_name = "asurion"

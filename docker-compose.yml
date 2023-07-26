@@ -1,5 +1,4 @@
 version: '3.8'
-
 services:
   fastapi:
     build: .
@@ -19,6 +18,12 @@ services:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     networks:
       - supply-chain-network
+    command: >
+      bash -c "
+        /usr/local/bin/docker-entrypoint.sh elasticsearch -p /tmp/epid &
+        while ! nc -z localhost 9200; do sleep 1; done;
+        python3 Scripts/upload_asurion_data_elasticsearch.py
+      "
 
   kibana:
     image: docker.elastic.co/kibana/kibana:7.14.1
